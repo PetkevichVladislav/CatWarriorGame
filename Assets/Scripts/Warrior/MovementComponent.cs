@@ -16,12 +16,9 @@ public class MovementComponent : MonoBehaviour
 
     private Rigidbody2D rigidBody;
 
-    private SpriteRenderer spriteRendered;
-
     private void Start()
     {
         rigidBody = GetComponent<Rigidbody2D>();
-        spriteRendered = GetComponent<SpriteRenderer>();
         stateComponent = GetComponent<StateComponent>();
     }
 
@@ -35,7 +32,11 @@ public class MovementComponent : MonoBehaviour
         // if player pressed key "jump" and them in not state "fly" add force to jump.
         if (Input.GetButtonDown("Jump") && stateComponent.GetState() != PlayerState.Jump)
         {
-            jumpAudioSource.Play();
+            if (jumpAudioSource)
+            {
+                jumpAudioSource.Play();
+            }
+            
             rigidBody.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
         }
 
@@ -46,7 +47,8 @@ public class MovementComponent : MonoBehaviour
     private void UpdateState(float dirX, float dirY)
     {
         // flip sprite direction
-        spriteRendered.flipX = dirX < 0;
+        var localScale = gameObject.transform.localScale;
+        gameObject.transform.localScale = new Vector3(dirX < 0 ? -1 : 1, localScale.y, localScale.z);
 
         //Important to update horizontal state before vertical
         // if player is moving - change them state to run otherwise to idle

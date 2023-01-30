@@ -66,7 +66,10 @@ public class HealthComponent : MonoBehaviour
         }
         else
         {
-            damageAudioSource.Play();
+            if (damageAudioSource)
+            {
+                damageAudioSource.Play();
+            } 
             StartCoroutine(ChangeColor());
             health -= damage;
         }
