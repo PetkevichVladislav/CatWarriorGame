@@ -1,4 +1,5 @@
 using UnityEngine;
+using PlayerState = StateComponent.PlayerState;
 
 public class MovementComponent : MonoBehaviour
 {
@@ -11,40 +12,17 @@ public class MovementComponent : MonoBehaviour
     [SerializeField]
     private AudioSource jumpAudioSource;
 
+    private StateComponent stateComponent;
+
     private Rigidbody2D rigidBody;
 
     private SpriteRenderer spriteRendered;
-
-    private Animator animator;
-
-    private PlayerState _playerState;
-
-    private PlayerState playerState
-    {
-        get
-        {
-            return _playerState;
-        }
-
-        set
-        {
-            // if states didn't changed - return
-            if (_playerState == value)
-            {
-                return;
-            }
-
-            _playerState = value;
-            // Set state changes in animation
-            animator.SetInteger("PlayerState", (int)_playerState);
-        }
-    }
 
     private void Start()
     {
         rigidBody = GetComponent<Rigidbody2D>();
         spriteRendered = GetComponent<SpriteRenderer>();
-        animator = GetComponent<Animator>();
+        stateComponent = GetComponent<StateComponent>();
     }
 
     private void Update()
@@ -55,7 +33,7 @@ public class MovementComponent : MonoBehaviour
         rigidBody.velocity = new Vector2(dirX * moveSpeed, rigidBody.velocity.y);
 
         // if player pressed key "jump" and them in not state "fly" add force to jump.
-        if (Input.GetButtonDown("Jump") && playerState != PlayerState.Jump)
+        if (Input.GetButtonDown("Jump") && stateComponent.GetState() != PlayerState.Jump)
         {
             jumpAudioSource.Play();
             rigidBody.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
@@ -74,29 +52,22 @@ public class MovementComponent : MonoBehaviour
         // if player is moving - change them state to run otherwise to idle
         if (Mathf.Abs(dirX) > 0.01f)
         {
-            playerState = PlayerState.Run;
+            stateComponent.TryChangeState(PlayerState.Run);
         }
         else
         {
-            playerState = PlayerState.Idle;
+            stateComponent.TryChangeState(PlayerState.Idle);
         }
 
         // if player is falling - change them state to jump
         if (Mathf.Abs(dirY) > 0.01f)
         {
-            playerState = PlayerState.Jump;
+            stateComponent.TryChangeState(PlayerState.Jump);
         }
         // if player landed - change them state to idle
-        else if (Mathf.Abs(dirY) <= 0.01f && playerState == PlayerState.Jump)
+        else if (Mathf.Abs(dirY) <= 0.01f && stateComponent.GetState() == PlayerState.Jump)
         {
-            playerState = PlayerState.Idle;
+            stateComponent.TryChangeState(PlayerState.Idle);
         }
-    }
-
-    private enum PlayerState
-    {
-        Idle = 0,
-        Run = 1,
-        Jump = 2,
     }
 }
