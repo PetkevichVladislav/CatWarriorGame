@@ -207,28 +207,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &122450950 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2004504942865966902, guid: fc83759c2d8a5a84cbf50456d66d9088, type: 3}
-  m_PrefabInstance: {fileID: 2004504944133587258}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &122450966
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 122450950}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0e736cae0b192d4489efde433b7b791, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  changeColorDelay: 0.3
-  maxHealth: 60
-  damageColor: {r: 1, g: 0, b: 0, a: 1}
-  damageAudioSource: {fileID: 0}
-  lives: 1
 --- !u!1 &126491440
 GameObject:
   m_ObjectHideFlags: 0
@@ -358,11 +336,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &240185634 stripped
-BoxCollider2D:
-  m_CorrespondingSourceObject: {fileID: 2903062576617896622, guid: e31c0afbec2d84940b90616920e503fb, type: 3}
-  m_PrefabInstance: {fileID: 2345894061816859712}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &332349610
 GameObject:
   m_ObjectHideFlags: 0
@@ -5606,33 +5579,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 122450951, guid: fc83759c2d8a5a84cbf50456d66d9088, type: 3}
-      propertyPath: MaxDistance
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 122450951, guid: fc83759c2d8a5a84cbf50456d66d9088, type: 3}
-      propertyPath: rolloffMode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 122450951, guid: fc83759c2d8a5a84cbf50456d66d9088, type: 3}
-      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 122450951, guid: fc83759c2d8a5a84cbf50456d66d9088, type: 3}
-      propertyPath: reverbZoneMixCustomCurve.m_Curve.Array.data[0].value
-      value: 0.643
-      objectReference: {fileID: 0}
     - target: {fileID: 2004504942865966891, guid: fc83759c2d8a5a84cbf50456d66d9088, type: 3}
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2004504942865966891, guid: fc83759c2d8a5a84cbf50456d66d9088, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -39
+      value: -38.979
       objectReference: {fileID: 0}
     - target: {fileID: 2004504942865966891, guid: fc83759c2d8a5a84cbf50456d66d9088, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -9.85
+      value: -9.943
       objectReference: {fileID: 0}
     - target: {fileID: 2004504942865966891, guid: fc83759c2d8a5a84cbf50456d66d9088, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5679,22 +5636,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1553453390, guid: e31c0afbec2d84940b90616920e503fb, type: 3}
-      propertyPath: topAttackCollider
-      value: 
-      objectReference: {fileID: 240185634}
-    - target: {fileID: 1553453390, guid: e31c0afbec2d84940b90616920e503fb, type: 3}
-      propertyPath: bottomAttackCollider
-      value: 
-      objectReference: {fileID: 240185634}
-    - target: {fileID: 1553453390, guid: e31c0afbec2d84940b90616920e503fb, type: 3}
-      propertyPath: topAttackDamageComponent
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1553453390, guid: e31c0afbec2d84940b90616920e503fb, type: 3}
-      propertyPath: bottomAttackDamageComponent
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 2345894060478453239, guid: e31c0afbec2d84940b90616920e503fb, type: 3}
       propertyPath: m_Name
       value: Player
@@ -5705,15 +5646,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2345894060478453244, guid: e31c0afbec2d84940b90616920e503fb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -44.835
+      value: -44.449
       objectReference: {fileID: 0}
     - target: {fileID: 2345894060478453244, guid: e31c0afbec2d84940b90616920e503fb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -9.928
+      value: -9.909
       objectReference: {fileID: 0}
     - target: {fileID: 2345894060478453244, guid: e31c0afbec2d84940b90616920e503fb, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2
+      value: -7
       objectReference: {fileID: 0}
     - target: {fileID: 2345894060478453244, guid: e31c0afbec2d84940b90616920e503fb, type: 3}
       propertyPath: m_LocalRotation.w

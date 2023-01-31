@@ -16,6 +16,12 @@ public class AttackComponent : MonoBehaviour
 
     [SerializeField]
     private int bottomAttackDamage;
+    
+    [SerializeField]
+    private float kickBackHorizontalSpeed;
+
+    [SerializeField]
+    private float kickBackVertivalSpeed;
 
     [SerializeField]
     private AudioSource attackAudioSource;
@@ -32,21 +38,23 @@ public class AttackComponent : MonoBehaviour
     {
         if (Input.GetButtonDown("TopAttack"))
         {
-            var isChanged = stateComponent.TryChangeState(PlayerState.TopAttack);
-            if (isChanged)
-            {
-                DealDamage(topAttackCollider, topAttackDamage);
-            }
+            stateComponent.TryChangeState(PlayerState.TopAttack);
         }
 
         if (Input.GetButtonDown("BottomAttack"))
         {
-            var isChanged = stateComponent.TryChangeState(PlayerState.BottomAttack);
-            if (isChanged)
-            {
-                DealDamage(bottomAttackCollider, bottomAttackDamage);
-            }
+            stateComponent.TryChangeState(PlayerState.BottomAttack);
         }
+    }
+
+    private void BottomAttack()
+    {
+        DealDamage(bottomAttackCollider, bottomAttackDamage);
+    }
+
+    private void TopAttack()
+    {
+        DealDamage(bottomAttackCollider, bottomAttackDamage);
     }
 
     private void DealDamage(Collider2D collider, int damage)
@@ -59,7 +67,21 @@ public class AttackComponent : MonoBehaviour
             if (healthComponent)
             {
                 healthComponent.DealDamage(damage);
+                KickBackEnemies(hitResults, i);
             }
+        }
+    }
+
+    private void KickBackEnemies(Collider2D[] hitResults, int i)
+    {
+        var rigidBody = hitResults[i].GetComponent<Rigidbody2D>();
+        if (rigidBody)
+        {
+            var direction = gameObject.transform.localScale.x;
+            var kickBackHorizontalForce = Vector2.right * direction * kickBackHorizontalSpeed;
+            var kickBackVerticalForce = Vector2.up * direction * kickBackVertivalSpeed;
+            rigidBody.AddForce(kickBackHorizontalForce, ForceMode2D.Impulse);
+            rigidBody.AddForce(kickBackVerticalForce, ForceMode2D.Impulse);
         }
     }
 }

@@ -26,6 +26,7 @@ public class MovementComponent : MonoBehaviour
     {
         var dirY = rigidBody.velocity.y;
         var dirX = Input.GetAxis("Horizontal");
+
         // if key in axis pressed, multiply on move speed x coord, y coord doesn't change
         rigidBody.velocity = new Vector2(dirX * moveSpeed, rigidBody.velocity.y);
 
@@ -47,8 +48,11 @@ public class MovementComponent : MonoBehaviour
     private void UpdateState(float dirX, float dirY)
     {
         // flip sprite direction
-        var localScale = gameObject.transform.localScale;
-        gameObject.transform.localScale = new Vector3(dirX < 0 ? -1 : 1, localScale.y, localScale.z);
+        if (dirX != 0)
+        {
+            var localScale = gameObject.transform.localScale;
+            gameObject.transform.localScale = new Vector3(dirX < 0 ? -1 : 1, localScale.y, localScale.z);
+        }
 
         //Important to update horizontal state before vertical
         // if player is moving - change them state to run otherwise to idle
