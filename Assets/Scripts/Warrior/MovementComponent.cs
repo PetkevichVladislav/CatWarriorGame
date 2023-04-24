@@ -47,7 +47,7 @@ public class MovementComponent : MonoBehaviour
 
     private void UpdateState(float dirX, float dirY)
     {
-        // flip sprite direction
+        // flip sprite direction if it changed.
         if (dirX != 0)
         {
             var localScale = gameObject.transform.localScale;

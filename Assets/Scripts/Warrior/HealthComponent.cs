@@ -1,5 +1,8 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using System;
 
 public class HealthComponent : MonoBehaviour
 {
@@ -7,6 +10,11 @@ public class HealthComponent : MonoBehaviour
     /// Delay to change color when person were damaged.
     /// </summary>
     public float changeColorDelay;
+
+    /// <summary>
+    /// Helthbar
+    /// </summary>
+    public Slider healthbar;
 
     /// <summary>
     /// Max number of health points.
@@ -31,6 +39,8 @@ public class HealthComponent : MonoBehaviour
     private int health;
 
     private SpriteRenderer spriteRendered;
+
+    public event Action OnDeath;
 
     private void Start()
     {
@@ -73,6 +83,7 @@ public class HealthComponent : MonoBehaviour
             StartCoroutine(ChangeColor());
             health -= damage;
         }
+        UpdateHelthbar();
     }
 
     private IEnumerator ChangeColor()
@@ -83,7 +94,7 @@ public class HealthComponent : MonoBehaviour
     }
 
     /// <summary>
-    /// Decrease amount of lives and end game if there are no lives.
+    /// Decrease amount of lives and change scene if there are no lives.
     /// </summary>
     private void Kill()
     {
@@ -91,8 +102,16 @@ public class HealthComponent : MonoBehaviour
         Debug.Log(lives);
         if (lives <= 0)
         {
-            Application.Quit();
+            OnDeath?.Invoke();
         }
         health = maxHealth;
+    }
+
+    private void UpdateHelthbar()
+    {
+        if (healthbar)
+        {
+            healthbar.value = (float)health / maxHealth;
+        }
     }
 }

@@ -24,7 +24,10 @@ public class AttackComponent : MonoBehaviour
     private float kickBackVertivalSpeed;
 
     [SerializeField]
-    private AudioSource attackAudioSource;
+    private AudioSource topAttackAudioSource;
+
+    [SerializeField]
+    private AudioSource bottomAttackAudioSource;
 
     private StateComponent stateComponent;
 
@@ -49,11 +52,19 @@ public class AttackComponent : MonoBehaviour
 
     private void BottomAttack()
     {
+        if (bottomAttackAudioSource)
+        {
+            bottomAttackAudioSource.Play();
+        }
         DealDamage(bottomAttackCollider, bottomAttackDamage);
     }
 
     private void TopAttack()
     {
+        if (topAttackAudioSource)
+        {
+            topAttackAudioSource.Play();
+        }
         DealDamage(bottomAttackCollider, bottomAttackDamage);
     }
 
